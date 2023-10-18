@@ -100,9 +100,9 @@ interface IFifthTaskGeneric<Type> extends IIndexSignatureGeneric<Type> {
 //     [index : string | number] : string | number
 // }
 function valuesAreNumbers (obj : /*IVarious*/ { [index : string | number] : string | number }) : boolean {
-    // первый способ
+    // // первый способ
     // for (let key in obj) {
-    //     if (typeof obj[key] !== 'number') {
+    //     if (typeof obj[key] !== 'number' && isFinite(obj[key])) {
     //         return false ;
     //     }
     // }
@@ -110,5 +110,11 @@ function valuesAreNumbers (obj : /*IVarious*/ { [index : string | number] : stri
 
     // второй способ
     return Object.values (obj)
-            .every (item => typeof item === 'number')
+            .every (item => typeof item === 'number' && Number.isFinite(Number(item)))
+    
+    // // третий способ, проверяя также строки
+    // return Object.values (obj)
+    //         .every (item => Number.isFinite(Number(item)))
 }
+
+// console.log (valuesAreNumbers({as : 2 , a : Infinity}))
