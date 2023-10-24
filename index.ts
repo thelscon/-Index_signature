@@ -16,13 +16,12 @@ type FirstTaskGeneric<Type , A , B> = {
 
 // Створіть інтерфейс, у якому типи значень у сигнатурі індексу є функціями. 
 // Ключами можуть бути рядки, а значеннями — функції, які приймають будь-які аргументи.
-type Types = string | number | boolean | bigint | symbol | undefined | null | object ;
 interface ISecondTask {
-    [index : string] : (...value : Types[]) => void
+    [index : string] : (...value : Array<any>) => void
 }
 
 // обобщённый интерфейс
-type Func<ArgumentTypes> = (...value : ArgumentTypes[]) => void 
+type Func<ArgumentTypes> = (...value : Array<ArgumentTypes>) => void 
 interface ISecondTaskGeneric<ArgumentTypes> {
     [index : string] : Func<ArgumentTypes>
 }
@@ -65,7 +64,9 @@ interface IFourthTaskGeneric<S extends string , AnotherType> {
 }
 
 // Створіть два інтерфейси, один з індексною сигнатурою, а інший розширює перший, додаючи специфічні властивості.
-type typesOfFunctions = ((value : string) => string) | ((value : number) => number) | ((value : boolean) => boolean)
+type typesOfFunctions = ((value : string) => string) 
+                        | ((value : number) => number) 
+                        | ((value : boolean) => boolean)
 interface IIndexSignature {
     [property : string] : string | number | boolean | typesOfFunctions
 }
